@@ -1,4 +1,4 @@
-var URLify = function(string) {
+var URLify = function(string, strLength) {
 	var url = '';
 
 	for (var i = 0; i < string.length; i++) {
@@ -7,9 +7,14 @@ var URLify = function(string) {
 		} else if ( string[i] !== ' ' ) {
 			url += string[i];
 		}
+		if (i + 1 === strLength) {
+			return url;
+		}
 	}
 	return url;
 }
 
-console.log(URLify('Mr John Smith'));
-console.log(URLify('what about  more    huh'));
+console.log(URLify('Mr John Smith  ', 13));
+console.log(URLify('Mr John  Smith ?', 13));
+console.log(URLify('Mr John  Smith ?', 20));
+console.log(URLify('Mr John  Smith ?', 14));
