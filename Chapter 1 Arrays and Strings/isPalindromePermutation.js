@@ -1,35 +1,27 @@
-var palinPermu = function(string) {
-	//create hash to store char count
-	let hash = {};
-	string = string.toLowerCase();
+var palindromePermutation = function(string) {
+	var lowercase = string.toLowerCase();
+	var charCount = {};
+	var twoStrike = 2;
 
-	//loop char to store in hash
-	for (var i = 0; i < string.length; i++) {
-		if (string[i] === ' '){}
-		else if (!hash[string[i]]) {
-			hash[string[i]] = 1;
-		} else hash[string[i]]++;
+	for (var i = 0; i < lowercase.length; i++) {
+		if (lowercase[i] === ' ') {
+			continue;
+		}
+		charCount[lowercase[i]] = ++charCount[lowercase[i]] || 1;
 	}
 
-	//check all char count is even, except 1 char
-	let count = 0;
-	for (var key in hash) {
-		if (hash[key]/2 !== 0 && count === 1) {
-			return false;
-		}
-
-		if(hash[key] === 1) {
-			count++;
+	for (var key in charCount) {
+		if (charCount[key] % 2 === 1) {
+			twoStrike--;
+			if (twoStrike === 0) {
+				return false;
+			}
 		}
 	}
-
 	return true;
-
-	console.log(hash);
 }
 
-//TESTS
-console.log(palinPermu('Tact Coa'));
-console.log(palinPermu('racecar'));
-console.log(palinPermu('Tact coab'));
-console.log(palinPermu('race car'));
+console.log(palindromePermutation('Tact Coa'));
+console.log(palindromePermutation('racecar'));
+console.log(palindromePermutation('Tact coab'));
+console.log(palindromePermutation('ra  ce car'));
